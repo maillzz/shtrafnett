@@ -11,6 +11,7 @@ import Profile from './pages/Profile';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Admin from './pages/Admin';
+import {BASE_URL} from "./constans.js";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -73,7 +74,7 @@ function App() {
     const refreshToken = localStorage.getItem('refresh_token');
     if (refreshToken) {
       try {
-        const response = await fetch('http://localhost:8000/api/logout/', {
+        const response = await fetch(`${BASE_URL}/logout/`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
