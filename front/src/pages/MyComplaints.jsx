@@ -28,10 +28,10 @@ function MyAllComplaints() {
       setLoading(true);
       try {
         const [res1, res2] = await Promise.all([
-          fetch('http://localhost:8000/api/complaints/', {
+          fetch(`${BASE_URL}/complaints/`, {
             headers: { Authorization: `Bearer ${token}` }
           }),
-          fetch('http://localhost:8000/api/legal-complaints/', {
+          fetch(`${BASE_URL}/legal-complaints/`, {
             headers: { Authorization: `Bearer ${token}` }
           })
         ]);

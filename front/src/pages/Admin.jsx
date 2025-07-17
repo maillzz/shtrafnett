@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import {BASE_URL} from "../constans.js";
 
 function Admin() {
   const [complaints, setComplaints] = useState([]);
@@ -13,7 +14,7 @@ function Admin() {
       return;
     }
 
-    fetch('http://localhost:5000/api/complaints', {
+    fetch(`${BASE_URL}/complaints`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((res) => res.json())
@@ -29,7 +30,7 @@ function Admin() {
 
   const handleUpdateStatus = (id, status) => {
     const token = localStorage.getItem('token');
-    fetch(`http://localhost:5000/api/complaints/${id}`, {
+    fetch(`${BASE_URL}/complaints/${id}`, {
       method: 'PATCH',
       headers: {
         Authorization: `Bearer ${token}`,

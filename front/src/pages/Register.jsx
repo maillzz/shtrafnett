@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import {BASE_URL} from "../constans.js";
 
 function Register() {
   const [formData, setFormData] = useState({ phone: '', password: '' });
@@ -17,7 +18,7 @@ function Register() {
     setError('');
 
     try {
-      const response = await fetch('http://localhost:8000/api/register/', {
+      const response = await fetch(`${BASE_URL}/register/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
