@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import {BASE_URL} from "../constans.js";
+import {V_BASE_URL} from "../constans.js";
 
 function Login() {
   const [formData, setFormData] = useState({ phone: '', password: '' });
@@ -18,7 +18,7 @@ function Login() {
     setError('');
 
     try {
-      const response = await fetch(`${BASE_URL}/login/`, {
+      const response = await fetch(`${V_BASE_URL}/login/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
