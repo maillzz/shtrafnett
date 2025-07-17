@@ -5,8 +5,14 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'your-secret-key-here'  # Замени на безопасный ключ
-DEBUG = True
-ALLOWED_HOSTS = []
+
+DEBUG = os.getenv('DJANGO_DEBUG', 'True') == 'True'
+
+ALLOWED_HOSTS = ['193.160.209.34', 'localhost', 'http://localhost:3000', 'http://localhost:5173',]
+
+if DEBUG:
+    ALLOWED_HOSTS.append('*')
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -33,7 +39,8 @@ MIDDLEWARE = [
 ]
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
-    "http://localhost:5173",  # порт твоего фронта
+    "http://localhost:5173",
+    '193.160.209.34'
 ]
 
 
