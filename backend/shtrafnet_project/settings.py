@@ -8,7 +8,7 @@ SECRET_KEY = 'your-secret-key-here'  # Замени на безопасный к
 
 DEBUG = os.getenv('DJANGO_DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = ['193.160.209.34', 'localhost', 'http://localhost:3000', 'http://localhost:5173',]
+ALLOWED_HOSTS = ['http://193.160.209.34', 'localhost', 'http://localhost:3000', 'http://localhost:5173',]
 
 if DEBUG:
     ALLOWED_HOSTS.append('*')
@@ -40,8 +40,9 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://localhost:5173",
-    '193.160.209.34'
+    'http://193.160.209.34'
 ]
+CORS_ALLOW_ALL_ORIGINS = True
 
 
 ROOT_URLCONF = 'shtrafnet_project.urls'
