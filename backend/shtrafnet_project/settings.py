@@ -8,10 +8,12 @@ SECRET_KEY = 'your-secret-key-here'  # Замени на безопасный к
 
 DEBUG = os.getenv('DJANGO_DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = ['http://193.160.209.34', 'localhost', 'http://localhost:3000', 'http://localhost:5173',]
+# ОШИБКА: ALLOWED_HOSTS должен содержать только домены/ip без протокола и портов
+# ИСПРАВЛЕНИЕ:
+ALLOWED_HOSTS = ['193.160.209.34', 'localhost']
 
 if DEBUG:
-    ALLOWED_HOSTS.append('*')
+    ALLOWED_HOSTS.append('*')  # Разрешаем все хосты в режиме отладки
 
 
 INSTALLED_APPS = [
@@ -30,20 +32,27 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',  # CorsMiddleware должен быть как можно выше
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-    "http://localhost:5173",
-    'http://193.160.209.34'
-]
-CORS_ALLOW_ALL_ORIGINS = True
 
+# ОШИБКА 1: Дубликат localhost
+# ОШИБКА 2: Конфликт между CORS_ALLOWED_ORIGINS и CORS_ALLOW_ALL_ORIGINS
+# ИСПРАВЛЕНИЕ:
+if DEBUG:
+    # В режиме отладки разрешаем все домены
+    CORS_ALLOW_ALL_ORIGINS = True
+else:
+    # В продакшене используем белый список
+    CORS_ALLOWED_ORIGINS = [
+        "http://localhost:5173",
+        "http://193.160.209.34",
+        # Добавьте здесь другие домены для production
+    ]
 
 ROOT_URLCONF = 'shtrafnet_project.urls'
 
